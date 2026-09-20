@@ -1,0 +1,26 @@
+@use 'sass:map';
+
+$breakpoints: (
+  'mobile': 20rem,
+  'tablet': 48rem,
+  'desktop': 64rem,
+);
+
+@mixin media($breakpoint) {
+  @media (min-width: map.get($breakpoints, $breakpoint)) {
+    @content;
+  }
+}
+
+:root {
+  --font-base: 'Oswald', sans-serif;
+  --background: #201f25;
+  --text: #fefefe;
+  --color-primary: #007bff;
+  --color-danger: #dc3545;
+}
+
+$color-primary: #007bff;
+$color-danger: #dc3545;
+$font-weight-bold: 700;
+$spacing-md: 1rem;

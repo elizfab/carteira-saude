@@ -1,0 +1,51 @@
+/* Global styles and design system imports */
+@use 'shared/styles/abstracts/variables' as vars;
+@use 'shared/styles/base/reset';
+@use 'shared/styles/base/typography';
+
+/* Tema Dark (padrão) */
+body.dark {
+  --background: #201f25;
+  --text: #fefefe;
+  --color-primary: #007bff;
+  --color-danger: #dc3545;
+}
+
+/* Tema Light */
+body.light {
+  --background: #f5f5f5;
+  --text: #1a1a1a;
+  --color-primary: #0056b3;
+  --color-danger: #b71c1c;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--text);
+  transition: background-color 0.3s ease, color 0.3s ease;
+
+  /* Regras abaixo dependem das variaveis acima, nao do tema em si,
+     entao valem tanto para body.dark quanto body.light. */
+  .ant-typography,
+  .ant-typography h1,
+  .ant-typography h2,
+  .ant-typography h3,
+  .ant-typography h4,
+  .ant-typography h5,
+  .ant-typography h6,
+  .ant-typography p,
+  .ant-typography span {
+    color: var(--text);
+  }
+
+  .ant-btn {
+    color: var(--text);
+    border-color: var(--color-primary);
+
+    &.ant-btn-primary {
+      color: #ffffff;
+      background-color: var(--color-primary);
+      border-color: var(--color-primary);
+    }
+  }
+}
