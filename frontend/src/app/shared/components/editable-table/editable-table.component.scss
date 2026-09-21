@@ -1,0 +1,54 @@
+.table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--line, currentColor);
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.editable-table {
+  border-collapse: collapse;
+  width: 100%;
+
+  th {
+    background: var(--hdr, rgba(127, 127, 127, 0.08));
+    font-size: 0.85rem;
+    text-align: left;
+    padding: 8px;
+    white-space: nowrap;
+  }
+
+  td {
+    padding: 4px;
+    border-top: 1px solid rgba(127, 127, 127, 0.2);
+    vertical-align: top;
+
+    input,
+    textarea {
+      width: 100%;
+    }
+
+    input.center {
+      text-align: center;
+    }
+  }
+
+  .col-acao {
+    width: 38px;
+    text-align: center;
+  }
+}
+
+.empty-row td {
+  padding: 14px;
+  color: var(--gray, inherit);
+  text-align: center;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}

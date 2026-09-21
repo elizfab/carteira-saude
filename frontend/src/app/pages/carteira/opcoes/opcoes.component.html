@@ -1,0 +1,46 @@
+<section class="panel">
+  <app-section-header
+    icone="printer"
+    titulo="Opções de impressão"
+    subtitulo="Escolha o que entra na carteirinha e quantas páginas mínimas cada seção terá."
+  />
+
+  <h3>Seções incluídas</h3>
+  <div class="checks">
+    @for (secao of secoes; track secao) {
+      <label
+        nz-checkbox
+        [nzChecked]="incluida(secao)"
+        (nzCheckedChange)="aoAlterarInclusao(secao, $event)"
+      >
+        {{ nomesSecao[secao] }}
+      </label>
+    }
+  </div>
+
+  <h3>Páginas mínimas</h3>
+  <div class="checks">
+    @for (secao of secoesPaginaveis; track secao) {
+      <div class="minrow">
+        <nz-input-number
+          class="num"
+          [nzMin]="1"
+          [nzMax]="8"
+          [ngModel]="paginasMinimas(secao)"
+          (ngModelChange)="aoAlterarPaginasMinimas(secao, $event)"
+          [attr.aria-label]="'Páginas mínimas de ' + nomesSecao[secao]"
+        />
+        <span>{{ nomesSecao[secao] }}</span>
+      </div>
+    }
+  </div>
+
+  <h3>Dados</h3>
+  <p class="hint">Faça um backup de todos os perfis para guardar ou abrir em outro computador.</p>
+  <div class="acts">
+    <button nz-button type="button" (click)="baixarBackup()">Baixar backup de todos os perfis</button>
+    <button nz-button type="button" nzType="primary" (click)="previsualizarEImprimir()">
+      Pré-visualizar e imprimir
+    </button>
+  </div>
+</section>

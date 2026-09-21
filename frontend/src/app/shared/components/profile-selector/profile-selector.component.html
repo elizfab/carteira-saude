@@ -1,0 +1,34 @@
+<div class="profile-selector">
+  <label for="sel-perfil">Paciente</label>
+  <nz-select id="sel-perfil" [ngModel]="ativoId()" (ngModelChange)="trocarPerfil($event)">
+    @for (perfil of perfis(); track perfil.id) {
+      <nz-option [nzValue]="perfil.id" [nzLabel]="rotuloPerfil(perfil)" />
+    }
+  </nz-select>
+  <button nz-button type="button" (click)="abrirNovoPerfil()">+ Novo perfil</button>
+  <button nz-button type="button" nzDanger (click)="excluirPerfilAtivo()">Excluir</button>
+</div>
+
+<nz-modal
+  [nzVisible]="modalNovoVisivel()"
+  (nzVisibleChange)="modalNovoVisivel.set($event)"
+  nzTitle="Novo perfil"
+  nzOkText="Criar perfil"
+  (nzOnCancel)="cancelarNovoPerfil()"
+  (nzOnOk)="confirmarNovoPerfil()"
+>
+  <ng-container *nzModalContent>
+    <p>
+      Crie uma carteira separada para outra pessoa, como o seu filho. Cada perfil tem os próprios
+      dados e o próprio PDF.
+    </p>
+    <label for="novo-nome">Nome do paciente</label>
+    <input
+      nz-input
+      id="novo-nome"
+      autocomplete="off"
+      [ngModel]="nomeNovoPerfil()"
+      (ngModelChange)="nomeNovoPerfil.set($event)"
+    />
+  </ng-container>
+</nz-modal>

@@ -2,6 +2,7 @@
 @use 'shared/styles/abstracts/variables' as vars;
 @use 'shared/styles/base/reset';
 @use 'shared/styles/base/typography';
+@use 'shared/styles/base/forms-grid';
 
 /* Tema Dark (padrão) */
 body.dark {
@@ -9,6 +10,10 @@ body.dark {
   --text: #fefefe;
   --color-primary: #007bff;
   --color-danger: #dc3545;
+  --gray: #a3acb3;
+  --line: #3a3944;
+  --titlebg: #2a2933;
+  --panel-bg: #26252d;
 }
 
 /* Tema Light */
@@ -17,6 +22,10 @@ body.light {
   --text: #1a1a1a;
   --color-primary: #0056b3;
   --color-danger: #b71c1c;
+  --gray: #5f6b75;
+  --line: #c9d0d5;
+  --titlebg: #eef3f6;
+  --panel-bg: #ffffff;
 }
 
 body {

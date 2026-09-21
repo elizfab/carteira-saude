@@ -1,0 +1,15 @@
+.profile-selector {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+
+  label {
+    color: var(--gray, inherit);
+    font-size: 0.9rem;
+  }
+
+  nz-select {
+    min-width: 200px;
+  }
+}

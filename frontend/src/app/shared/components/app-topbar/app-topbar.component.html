@@ -1,0 +1,31 @@
+<header class="topbar">
+  <div class="brand">
+    <span nz-icon nzType="heart" class="brand-icon"></span>
+    <div>
+      <b>Carteira de Saúde e Vacinação</b>
+      <small>Seus dados ficam salvos só neste navegador</small>
+    </div>
+  </div>
+
+  <app-profile-selector class="who" />
+
+  <div class="actions">
+    <button nz-button type="button" (click)="alternarTema()">
+      <span nz-icon [nzType]="isDarkMode() ? 'sun' : 'moon'"></span>
+      {{ isDarkMode() ? 'Modo claro' : 'Modo escuro' }}
+    </button>
+    <button nz-button type="button" (click)="abrirSeletorImportar()">Importar dados</button>
+    <input
+      #inputImportar
+      type="file"
+      accept="application/json,.json"
+      hidden
+      (change)="importar($event)"
+    />
+    <button nz-button type="button" (click)="exportar()">Exportar dados</button>
+    <button nz-button type="button" (click)="previsualizar()">Pré-visualizar</button>
+    <button nz-button type="button" nzType="primary" (click)="imprimir()">
+      Imprimir / salvar PDF
+    </button>
+  </div>
+</header>

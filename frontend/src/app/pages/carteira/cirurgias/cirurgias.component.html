@@ -1,0 +1,15 @@
+<section class="panel">
+  <app-section-header
+    [icone]="icone"
+    titulo="Histórico de Cirurgias e Internações"
+    subtitulo="Cirurgias, procedimentos e internações."
+  />
+  <app-editable-table
+    [colunas]="colunas"
+    [linhas]="linhas()"
+    rotuloAdicionar="Adicionar registro"
+    (adicionar)="adicionar()"
+    (remover)="remover($event)"
+    (alterar)="alterar($event)"
+  />
+</section>

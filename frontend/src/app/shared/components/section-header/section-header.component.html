@@ -1,0 +1,7 @@
+<h2 nz-typography class="section-title">
+  <span nz-icon [nzType]="icone()" class="section-icon"></span>
+  {{ titulo() }}
+</h2>
+@if (subtitulo()) {
+  <p class="hint">{{ subtitulo() }}</p>
+}

@@ -1,0 +1,44 @@
+:host {
+  display: block;
+}
+
+.prof {
+  margin-left: 10px;
+  color: var(--gray);
+}
+
+.badge {
+  margin-left: auto;
+  font-style: normal;
+  font-size: 0.85rem;
+  background: var(--titlebg);
+  color: var(--color-primary);
+  padding: 2px 9px;
+  border-radius: 99px;
+}
+
+.spec-f {
+  margin-top: 14px;
+  text-align: right;
+}
+
+.addesp {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 6px;
+
+  input {
+    flex: 1;
+    min-width: 220px;
+  }
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}

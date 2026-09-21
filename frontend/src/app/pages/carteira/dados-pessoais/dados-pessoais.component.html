@@ -1,0 +1,108 @@
+<section class="panel">
+  <app-section-header
+    icone="idcard"
+    titulo="Dados pessoais"
+    subtitulo="Estas informações aparecem na primeira página da carteirinha."
+  />
+
+  <app-photo-upload
+    [fotoUrl]="fotoUrl"
+    (fotoAlterada)="aoAlterarFoto($event)"
+    (fotoRemovida)="removerFoto()"
+  />
+
+  <form [formGroup]="form" class="grid">
+    <div class="f s12">
+      <label for="nome">Nome completo</label>
+      <input nz-input id="nome" formControlName="nome" autocomplete="off" />
+    </div>
+
+    <div class="f s4">
+      <label for="nascimento">Data de nascimento</label>
+      <input nz-input type="date" id="nascimento" formControlName="nascimento" />
+    </div>
+
+    <div class="f s4">
+      <label for="cpf">CPF</label>
+      <input nz-input id="cpf" formControlName="cpf" appMascaraCpf placeholder="000.000.000-00" autocomplete="off" />
+    </div>
+
+    <div class="f s4">
+      <span class="lab">Tipo sanguíneo</span>
+      <div class="opts">
+        <nz-radio-group formControlName="abo">
+          @for (tipo of tiposSanguineos; track tipo) {
+            <label nz-radio [nzValue]="tipo">{{ tipo }}</label>
+          }
+        </nz-radio-group>
+        <nz-radio-group formControlName="rh">
+          <label nz-radio nzValue="+">+</label>
+          <label nz-radio nzValue="-">−</label>
+        </nz-radio-group>
+        <button nz-button nzType="text" type="button" (click)="limparTipoSanguineo()">limpar</button>
+      </div>
+    </div>
+
+    <div class="f s6">
+      <label for="telefone">Telefone</label>
+      <input
+        nz-input
+        id="telefone"
+        formControlName="telefone"
+        appMascaraTelefone
+        placeholder="(00) 00000-0000"
+        autocomplete="off"
+      />
+    </div>
+
+    <div class="f s6">
+      <label for="email">E-mail</label>
+      <input nz-input type="email" id="email" formControlName="email" autocomplete="off" />
+    </div>
+
+    <div class="f s12">
+      <label for="endereco">Endereço (rua, número, bairro, cidade/UF, CEP)</label>
+      <textarea nz-input id="endereco" formControlName="endereco" rows="3"></textarea>
+    </div>
+
+    <div class="sub-h">Contato de emergência</div>
+
+    <div class="f s5">
+      <label for="emerg_nome">Nome</label>
+      <input nz-input id="emerg_nome" formControlName="emerg_nome" autocomplete="off" />
+    </div>
+    <div class="f s3">
+      <label for="emerg_parentesco">Parentesco</label>
+      <input nz-input id="emerg_parentesco" formControlName="emerg_parentesco" autocomplete="off" />
+    </div>
+    <div class="f s4">
+      <label for="emerg_telefone">Telefone</label>
+      <input
+        nz-input
+        id="emerg_telefone"
+        formControlName="emerg_telefone"
+        appMascaraTelefone
+        placeholder="(00) 00000-0000"
+        autocomplete="off"
+      />
+    </div>
+
+    <div class="sub-h">Convênio médico</div>
+
+    <div class="f s6">
+      <label for="convenio">Convênio / plano</label>
+      <textarea nz-input id="convenio" formControlName="convenio" rows="2"></textarea>
+    </div>
+    <div class="f s6">
+      <label for="carteirinha">Número da carteirinha</label>
+      <input nz-input id="carteirinha" formControlName="carteirinha" autocomplete="off" />
+    </div>
+
+    <div class="sub-h">Observações importantes</div>
+
+    <div class="f s12">
+      <label for="obs">Condições de saúde, avisos para emergências etc.</label>
+      <textarea nz-input id="obs" formControlName="obs" rows="4"></textarea>
+    </div>
+  </form>
+</section>

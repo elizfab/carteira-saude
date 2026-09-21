@@ -1,0 +1,15 @@
+<section class="panel">
+  <app-section-header
+    [icone]="icone"
+    titulo="Condições e Diagnósticos"
+    subtitulo="Registre cada condição com a data em que foi descoberta e quem acompanha."
+  />
+  <app-editable-table
+    [colunas]="colunas"
+    [linhas]="linhas()"
+    rotuloAdicionar="Adicionar condição"
+    (adicionar)="adicionar()"
+    (remover)="remover($event)"
+    (alterar)="alterar($event)"
+  />
+</section>

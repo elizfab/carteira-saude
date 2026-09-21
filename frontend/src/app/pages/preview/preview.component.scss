@@ -1,0 +1,215 @@
+.pbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 16px;
+  align-items: center;
+  padding: 10px 20px;
+  background: var(--background);
+  border-bottom: 1px solid var(--line, currentColor);
+
+  .grow {
+    flex: 1;
+    color: var(--gray, inherit);
+  }
+}
+
+#sheets {
+  padding: 20px 0;
+  background: #dde5ea;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.print-page {
+  width: 210mm;
+  min-height: 297mm;
+  padding: 12.7mm;
+  margin-bottom: 14px;
+  background: #fff;
+  color: #1f2a33;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  break-after: page;
+}
+
+.print-header {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #8c98a1;
+  font-size: 10pt;
+  color: #5f6b75;
+}
+
+.print-brand {
+  font-weight: 700;
+  color: #2c5876;
+}
+
+.print-body {
+  flex: 1;
+  margin-top: 12px;
+}
+
+.print-title {
+  color: #2c5876;
+  font-size: 14pt;
+  margin: 0 0 12px;
+
+  small {
+    font-weight: 400;
+    color: #5f6b75;
+    font-size: 10pt;
+  }
+}
+
+.print-subheading {
+  margin: 16px 0 8px;
+  color: #3f6f55;
+  font-weight: 700;
+}
+
+.print-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+
+  .print-field {
+    flex: 1;
+  }
+}
+
+.print-field {
+  border: 1px solid #8c98a1;
+  border-radius: 3px;
+  padding: 4px 8px;
+  margin-bottom: 8px;
+
+  &--full {
+    width: 100%;
+  }
+
+  .l {
+    display: block;
+    font-size: 8pt;
+    color: #5f6b75;
+  }
+
+  .v {
+    font-size: 11pt;
+    white-space: pre-line;
+    min-height: 1.2em;
+  }
+}
+
+.print-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 9pt;
+
+  th,
+  td {
+    border: 1px solid #b4bec6;
+    padding: 4px 6px;
+    text-align: left;
+    vertical-align: top;
+  }
+
+  th {
+    background: #e7edf1;
+    color: #2c5876;
+  }
+
+  &--mini {
+    margin-bottom: 10px;
+    font-size: 8.5pt;
+  }
+}
+
+.print-card {
+  border: 1px solid #8c98a1;
+  border-radius: 3px;
+  padding: 8px;
+  margin-bottom: 12px;
+}
+
+.print-card-header {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 6px;
+
+  b {
+    color: #2c5876;
+  }
+}
+
+.print-box {
+  border: 1px solid #8c98a1;
+  border-radius: 3px;
+  padding: 8px;
+  margin-bottom: 10px;
+
+  &--full {
+    flex: 1;
+  }
+}
+
+.print-box-header {
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+  margin-bottom: 6px;
+
+  b {
+    color: #2c5876;
+  }
+
+  em {
+    color: #5f6b75;
+    font-size: 9pt;
+  }
+
+  .print-check {
+    margin-left: auto;
+    text-transform: capitalize;
+    font-size: 9pt;
+    color: #3f6f55;
+  }
+}
+
+.print-box-body {
+  white-space: pre-line;
+  min-height: 3em;
+}
+
+.print-footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 12px;
+  padding-top: 8px;
+  border-top: 1px solid #c9d0d5;
+  font-size: 9pt;
+  color: #5f6b75;
+}
+
+@media print {
+  .pbar {
+    display: none;
+  }
+
+  #sheets {
+    background: none;
+    padding: 0;
+  }
+
+  .print-page {
+    box-shadow: none;
+    margin: 0;
+  }
+}
