@@ -1,0 +1,14 @@
+<section class="panel">
+  <app-section-header
+    icone="edit"
+    titulo="Anotações gerais"
+    subtitulo="Observações médicas, recomendações e acompanhamento. O texto sai numa página pautada."
+  />
+
+  <form [formGroup]="form" class="grid">
+    <div class="f s12">
+      <label for="notas">Anotações</label>
+      <textarea nz-input id="notas" formControlName="notas" rows="14"></textarea>
+    </div>
+  </form>
+</section>

@@ -1,22 +1,54 @@
+/* Fonte Carlito self-hosted: ver angular.json (architect.build.options.styles), mesma fonte do
+   protótipo legado (@fontsource/carlito). */
+
 /* Global styles and design system imports */
 @use 'shared/styles/abstracts/variables' as vars;
 @use 'shared/styles/base/reset';
 @use 'shared/styles/base/typography';
+@use 'shared/styles/base/forms-grid';
 
-/* Tema Dark (padrão) */
+/* Tema Light (fiel ao protótipo: docs/backup-carteira-saude/carteira-saude.html) */
+body.light {
+  --background: #f2f5f7;
+  --text: #1f2a33;
+  --color-primary: #2c5876;
+  --color-danger: #9b2c2c;
+  --gray: #5f6b75;
+  --line: #c9d0d5;
+  --titlebg: #eef3f6;
+  --panel-bg: #ffffff;
+  --blue: #4f7f9e;
+  --dblue: #2c5876;
+  --green: #6a9c80;
+  --dgreen: #3f6f55;
+  --lgray: #a3acb3;
+  --border: #8c98a1;
+  --hdr: #e7edf1;
+  --icobg: #e3edf3;
+}
+
+/*
+ * Tema Dark — o protótipo original não tem tema escuro; esta é uma variação própria do app
+ * Angular (mantendo a mesma relação tonal do protótipo) para o toggle claro/escuro do topbar.
+ * Ver docs/PENDENCIAS.md.
+ */
 body.dark {
   --background: #201f25;
   --text: #fefefe;
-  --color-primary: #007bff;
-  --color-danger: #dc3545;
-}
-
-/* Tema Light */
-body.light {
-  --background: #f5f5f5;
-  --text: #1a1a1a;
-  --color-primary: #0056b3;
-  --color-danger: #b71c1c;
+  --color-primary: #6ea8c9;
+  --color-danger: #e07a7a;
+  --gray: #a3acb3;
+  --line: #3a3944;
+  --titlebg: #2a2933;
+  --panel-bg: #26252d;
+  --blue: #6ea8c9;
+  --dblue: #9cc6df;
+  --green: #8fc2a4;
+  --dgreen: #6a9c80;
+  --lgray: #7d858c;
+  --border: #4a4952;
+  --hdr: #2f2e38;
+  --icobg: #2a2933;
 }
 
 body {

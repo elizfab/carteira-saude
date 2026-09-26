@@ -1,0 +1,125 @@
+<section class="panel">
+  <app-section-header
+    [icone]="icone"
+    titulo="Equipe e acompanhamento"
+    subtitulo="Cadastre cada especialista com contato, consultas, retornos e exames (inclusive prevenção). Na carteirinha isso vira duas seções: contatos e acompanhamento."
+  />
+
+  @if (!equipe().length) {
+    <p class="tip">Nenhum especialista ainda. Adicione o primeiro abaixo.</p>
+  }
+
+  <nz-collapse>
+    @for (item of equipe(); track item.id; let i = $index) {
+      <nz-collapse-panel
+        [nzActive]="estaAberto(item.id)"
+        (nzActiveChange)="aoAlternarPainel(item.id, $event)"
+        [nzHeader]="cabecalho"
+      >
+        <ng-template #cabecalho>
+          <b>{{ rotulo(item) }}</b>
+          <span class="prof">{{ item.profissional }}</span>
+          @if (proximaData(item); as prox) {
+            <em class="badge">Próxima data: {{ prox }}</em>
+          }
+        </ng-template>
+
+        <div class="grid">
+          <div class="f s4">
+            <label [for]="'esp-' + i">Especialidade</label>
+            <input
+              nz-input
+              [id]="'esp-' + i"
+              [value]="item.especialidade"
+              (input)="atualizarCampo(i, 'especialidade', $any($event.target).value)"
+            />
+          </div>
+          <div class="f s4">
+            <label [for]="'prof-' + i">Profissional</label>
+            <input
+              nz-input
+              [id]="'prof-' + i"
+              [value]="item.profissional"
+              (input)="atualizarCampo(i, 'profissional', $any($event.target).value)"
+            />
+          </div>
+          <div class="f s4">
+            <label [for]="'tel-' + i">Telefone</label>
+            <input
+              nz-input
+              [id]="'tel-' + i"
+              [value]="item.telefone"
+              (input)="aoDigitarTelefone(i, $event)"
+            />
+          </div>
+          <div class="f s6">
+            <label [for]="'local-' + i">Local / clínica</label>
+            <input
+              nz-input
+              [id]="'local-' + i"
+              [value]="item.local"
+              (input)="atualizarCampo(i, 'local', $any($event.target).value)"
+            />
+          </div>
+          <div class="f s6">
+            <label [for]="'email-' + i">E-mail ou site</label>
+            <input
+              nz-input
+              [id]="'email-' + i"
+              [value]="item.email"
+              (input)="atualizarCampo(i, 'email', $any($event.target).value)"
+            />
+          </div>
+        </div>
+
+        <h3>Consultas e retornos</h3>
+        <app-editable-table
+          [colunas]="colunasConsultas"
+          [linhas]="item.consultas"
+          rotuloAdicionar="Adicionar consulta"
+          (adicionar)="adicionarLinhaConsulta(i)"
+          (remover)="removerLinhaConsulta(i, $event)"
+          (alterar)="alterarLinhaConsulta(i, $event)"
+        />
+
+        <h3>Exames e prevenção</h3>
+        <app-editable-table
+          [colunas]="colunasExames"
+          [linhas]="item.exames"
+          rotuloAdicionar="Adicionar exame"
+          (adicionar)="adicionarLinhaExame(i)"
+          (remover)="removerLinhaExame(i, $event)"
+          (alterar)="alterarLinhaExame(i, $event)"
+        />
+
+        <div class="spec-f">
+          <button nz-button nzDanger type="button" (click)="removerEspecialista(i, item)">
+            Remover este especialista
+          </button>
+        </div>
+      </nz-collapse-panel>
+    }
+  </nz-collapse>
+
+  <div class="addesp">
+    <label class="sr-only" for="nova-esp">Nova especialidade</label>
+    <input
+      nz-input
+      id="nova-esp"
+      list="esp-list"
+      placeholder="Especialidade (ex.: Pediatria)"
+      autocomplete="off"
+      [value]="novaEspecialidade()"
+      (input)="novaEspecialidade.set($any($event.target).value)"
+      (keydown.enter)="adicionarEspecialista()"
+    />
+    <datalist id="esp-list">
+      @for (esp of especialidadesSugeridas; track esp) {
+        <option [value]="esp"></option>
+      }
+    </datalist>
+    <button nz-button nzType="primary" type="button" (click)="adicionarEspecialista()">
+      + Adicionar especialista
+    </button>
+  </div>
+</section>

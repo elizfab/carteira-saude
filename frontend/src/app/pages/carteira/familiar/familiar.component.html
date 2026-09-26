@@ -1,0 +1,27 @@
+<section class="panel">
+  <app-section-header
+    icone="usergroup-add"
+    titulo="Histórico familiar"
+    subtitulo="Marque se há casos na família e anote quem e com que idade."
+  />
+
+  <form [formGroup]="form">
+    @for (categoria of categorias; track categoria.chave) {
+      <div class="sub-h">{{ categoria.titulo }} <span class="hint-inline">{{ categoria.hint }}</span></div>
+      <div class="opts" [formGroupName]="categoria.chave">
+        <nz-radio-group formControlName="r">
+          <label nz-radio nzValue="sim">Sim</label>
+          <label nz-radio nzValue="nao">Não</label>
+          <label nz-radio nzValue="nsei">Não sei</label>
+        </nz-radio-group>
+        <button nz-button nzType="text" type="button" (click)="limpar(categoria.chave)">limpar</button>
+      </div>
+      <div class="grid" [formGroupName]="categoria.chave">
+        <div class="f s12">
+          <label>Quem e observações</label>
+          <textarea nz-input formControlName="t" rows="2"></textarea>
+        </div>
+      </div>
+    }
+  </form>
+</section>

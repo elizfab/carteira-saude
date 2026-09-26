@@ -1,0 +1,223 @@
+<div class="pbar">
+  <button nz-button type="button" (click)="voltar()">← Voltar ao preenchimento</button>
+  <span class="grow">{{ perfil()?.dados?.nome || 'Perfil sem nome' }} · {{ paginas().length }} página(s) A4</span>
+  <button nz-button type="button" nzType="primary" (click)="imprimir()">Imprimir / salvar PDF</button>
+</div>
+
+<div id="sheets">
+  @if (perfil(); as p) {
+    @for (pagina of paginas(); track $index; let i = $index) {
+      <section class="print-page">
+        <header class="print-header">
+          <span class="print-brand">Carteira de Saúde e Vacinação</span>
+          <span class="print-patient">Paciente: {{ p.dados.nome || '—' }}</span>
+        </header>
+
+        <div class="print-body">
+          <h2 class="print-title">
+            {{ i + 1 }}. {{ pagina.titulo }}
+            @if (pagina.continuacao) {
+              <small>(continuação)</small>
+            }
+          </h2>
+
+          @switch (pagina.tipo) {
+            @case ('dados') {
+              <div class="print-field print-field--full">
+                <span class="l">Nome completo</span>
+                <div class="v">{{ p.dados.nome }}</div>
+              </div>
+              <div class="print-row">
+                <div class="print-field">
+                  <span class="l">Data de nascimento</span>
+                  <div class="v">{{ formatarData(p.dados.nascimento) }}</div>
+                </div>
+                <div class="print-field">
+                  <span class="l">CPF</span>
+                  <div class="v">{{ p.dados.cpf }}</div>
+                </div>
+                <div class="print-field">
+                  <span class="l">Tipo sanguíneo</span>
+                  <div class="v">{{ p.dados.abo }}{{ p.dados.rh }}</div>
+                </div>
+              </div>
+              <div class="print-row">
+                <div class="print-field">
+                  <span class="l">Telefone</span>
+                  <div class="v">{{ p.dados.telefone }}</div>
+                </div>
+                <div class="print-field">
+                  <span class="l">E-mail</span>
+                  <div class="v">{{ p.dados.email }}</div>
+                </div>
+              </div>
+              <div class="print-field print-field--full">
+                <span class="l">Endereço</span>
+                <div class="v">{{ p.dados.endereco }}</div>
+              </div>
+              <div class="print-subheading">Contato de emergência</div>
+              <div class="print-row">
+                <div class="print-field">
+                  <span class="l">Nome</span>
+                  <div class="v">{{ p.dados.emerg_nome }}</div>
+                </div>
+                <div class="print-field">
+                  <span class="l">Parentesco</span>
+                  <div class="v">{{ p.dados.emerg_parentesco }}</div>
+                </div>
+                <div class="print-field">
+                  <span class="l">Telefone</span>
+                  <div class="v">{{ p.dados.emerg_telefone }}</div>
+                </div>
+              </div>
+              <div class="print-subheading">Convênio médico</div>
+              <div class="print-row">
+                <div class="print-field">
+                  <span class="l">Convênio / plano</span>
+                  <div class="v">{{ p.dados.convenio }}</div>
+                </div>
+                <div class="print-field">
+                  <span class="l">Número da carteirinha</span>
+                  <div class="v">{{ p.dados.carteirinha }}</div>
+                </div>
+              </div>
+              <div class="print-field print-field--full">
+                <span class="l">Observações importantes</span>
+                <div class="v">{{ p.dados.obs }}</div>
+              </div>
+            }
+
+            @case ('tabela') {
+              <table class="print-table">
+                <thead>
+                  <tr>
+                    @for (coluna of pagina.colunas; track coluna.chave) {
+                      <th>{{ coluna.rotulo }}</th>
+                    }
+                  </tr>
+                </thead>
+                <tbody>
+                  @for (linha of pagina.linhas; track $index) {
+                    <tr>
+                      @for (coluna of pagina.colunas; track coluna.chave) {
+                        <td>{{ valorCelula(linha, coluna.chave, coluna.tipo) }}</td>
+                      }
+                    </tr>
+                  } @empty {
+                    <tr>
+                      <td [attr.colspan]="pagina.colunas?.length">Nenhum registro.</td>
+                    </tr>
+                  }
+                </tbody>
+              </table>
+            }
+
+            @case ('equipe-contatos') {
+              <table class="print-table">
+                <thead>
+                  <tr>
+                    @for (coluna of pagina.colunas; track coluna.chave) {
+                      <th>{{ coluna.rotulo }}</th>
+                    }
+                  </tr>
+                </thead>
+                <tbody>
+                  @for (linha of pagina.linhas; track $index) {
+                    <tr>
+                      @for (coluna of pagina.colunas; track coluna.chave) {
+                        <td>{{ valorCelula(linha, coluna.chave, coluna.tipo) }}</td>
+                      }
+                    </tr>
+                  } @empty {
+                    <tr>
+                      <td [attr.colspan]="pagina.colunas?.length">Nenhum especialista cadastrado.</td>
+                    </tr>
+                  }
+                </tbody>
+              </table>
+            }
+
+            @case ('acompanhamento') {
+              @for (esp of pagina.itensEquipe; track esp.id) {
+                <div class="print-card">
+                  <div class="print-card-header">
+                    <b>{{ esp.especialidade || 'Especialidade' }}</b>
+                    <span>{{ esp.profissional }}</span>
+                    <span>{{ esp.telefone }}</span>
+                    <span>{{ esp.local }}</span>
+                  </div>
+                  <table class="print-table print-table--mini">
+                    <thead>
+                      <tr>
+                        <th>Data</th>
+                        <th>Retorno</th>
+                        <th>Observações</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      @for (c of esp.consultas; track c.id) {
+                        <tr>
+                          <td>{{ formatarData(c.data) }}</td>
+                          <td>{{ formatarData(c.retorno) }}</td>
+                          <td>{{ c.obs }}</td>
+                        </tr>
+                      }
+                    </tbody>
+                  </table>
+                  <table class="print-table print-table--mini">
+                    <thead>
+                      <tr>
+                        <th>Exame / prevenção</th>
+                        <th>Data</th>
+                        <th>Resultado</th>
+                        <th>Próximo</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      @for (x of esp.exames; track x.id) {
+                        <tr>
+                          <td>{{ x.tipo }}</td>
+                          <td>{{ formatarData(x.data) }}</td>
+                          <td>{{ x.resultado }}</td>
+                          <td>{{ formatarData(x.proximo) }}</td>
+                        </tr>
+                      }
+                    </tbody>
+                  </table>
+                </div>
+              }
+            }
+
+            @case ('texto') {
+              @for (bloco of pagina.textos; track bloco.titulo) {
+                <div class="print-box">
+                  <div class="print-box-header">
+                    <b>{{ bloco.titulo }}</b>
+                    @if (bloco.hint) {
+                      <em>{{ bloco.hint }}</em>
+                    }
+                    @if (bloco.check) {
+                      <span class="print-check">{{ bloco.check }}</span>
+                    }
+                  </div>
+                  <div class="print-box-body">{{ bloco.texto }}</div>
+                </div>
+              }
+            }
+
+            @case ('notas') {
+              <div class="print-box print-box--full">
+                <div class="print-box-body">{{ pagina.textos?.[0]?.texto }}</div>
+              </div>
+            }
+          }
+        </div>
+
+        <footer class="print-footer">
+          <span>Assinatura: ______________________ &nbsp; Data: _______</span>
+          <span>Página {{ i + 1 }} de {{ paginas().length }}</span>
+        </footer>
+      </section>
+    }
+  }
+</div>

@@ -1,0 +1,15 @@
+<section class="panel">
+  <app-section-header
+    [icone]="icone"
+    titulo="Histórico de Consultas"
+    subtitulo="Inclua a data de retorno, se o médico pediu."
+  />
+  <app-editable-table
+    [colunas]="colunas"
+    [linhas]="linhas()"
+    rotuloAdicionar="Adicionar consulta"
+    (adicionar)="adicionar()"
+    (remover)="remover($event)"
+    (alterar)="alterar($event)"
+  />
+</section>

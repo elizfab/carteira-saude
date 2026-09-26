@@ -1,0 +1,15 @@
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 4px;
+}
+
+.section-icon {
+  color: var(--color-primary);
+}
+
+.hint {
+  margin: 0 0 18px;
+  color: var(--gray, inherit);
+}

@@ -1,0 +1,23 @@
+<div class="foto-ed">
+  <div class="foto-prev">
+    @if (fotoUrl()) {
+      <img [src]="fotoUrl()" alt="Foto 3x4" />
+    } @else {
+      <span>Sem foto</span>
+    }
+  </div>
+  <div>
+    <button nz-button type="button" (click)="abrirSeletor()">Escolher foto 3x4</button>
+    @if (fotoUrl()) {
+      <button nz-button type="button" nzType="text" (click)="remover()">Remover</button>
+    }
+    <input
+      #inputArquivo
+      type="file"
+      accept="image/*"
+      hidden
+      (change)="aoEscolherArquivo($event)"
+    />
+    <p class="mini-hint">A foto é opcional e fica salva só neste navegador.</p>
+  </div>
+</div>

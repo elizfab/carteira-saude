@@ -1,0 +1,15 @@
+<section class="panel">
+  <app-section-header
+    [icone]="icone"
+    titulo="Histórico de Vacinação"
+    subtitulo="Uma linha por dose aplicada."
+  />
+  <app-editable-table
+    [colunas]="colunas"
+    [linhas]="linhas()"
+    rotuloAdicionar="Adicionar vacina"
+    (adicionar)="adicionar()"
+    (remover)="remover($event)"
+    (alterar)="alterar($event)"
+  />
+</section>

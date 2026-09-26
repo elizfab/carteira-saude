@@ -1,0 +1,15 @@
+<nav aria-label="Seções da carteira">
+  <ul nz-menu nzMode="inline" class="sidenav-menu">
+    @for (item of itens; track item.path) {
+      <li
+        nz-menu-item
+        [routerLink]="[item.path]"
+        routerLinkActive="ant-menu-item-selected"
+        [nzSelected]="false"
+      >
+        <span nz-icon [nzType]="item.icone"></span>
+        <span>{{ item.rotulo }}</span>
+      </li>
+    }
+  </ul>
+</nav>

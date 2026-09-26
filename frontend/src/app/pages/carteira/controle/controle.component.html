@@ -1,0 +1,15 @@
+<section class="panel">
+  <app-section-header
+    [icone]="icone"
+    titulo="Controle de Pressão, Peso e Glicemia"
+    subtitulo="Medições ao longo do tempo. Deixe em branco o que não medir."
+  />
+  <app-editable-table
+    [colunas]="colunas"
+    [linhas]="linhas()"
+    rotuloAdicionar="Adicionar medição"
+    (adicionar)="adicionar()"
+    (remover)="remover($event)"
+    (alterar)="alterar($event)"
+  />
+</section>

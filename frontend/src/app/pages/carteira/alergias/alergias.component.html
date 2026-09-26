@@ -1,0 +1,16 @@
+<section class="panel">
+  <app-section-header
+    icone="warning"
+    titulo="Alergias e restrições"
+    subtitulo="Anote a reação e a gravidade de cada caso."
+  />
+
+  <form [formGroup]="form" class="grid">
+    @for (categoria of categorias; track categoria.chave) {
+      <div class="f s12">
+        <label [for]="categoria.chave">{{ categoria.titulo }} {{ categoria.hint }}</label>
+        <textarea nz-input [id]="categoria.chave" [formControlName]="categoria.chave" rows="4"></textarea>
+      </div>
+    }
+  </form>
+</section>

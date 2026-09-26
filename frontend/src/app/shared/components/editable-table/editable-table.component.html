@@ -1,0 +1,73 @@
+<div class="table-wrap">
+  <table class="editable-table">
+    <thead>
+      <tr>
+        @for (coluna of colunas(); track coluna.chave) {
+          <th [style.min-width.px]="coluna.larguraMin || 120">{{ coluna.rotulo }}</th>
+        }
+        <th class="col-acao"><span class="sr-only">Remover</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      @if (linhas().length) {
+        @for (linha of linhas(); track linha.id; let i = $index) {
+          <tr>
+            @for (coluna of colunas(); track coluna.chave) {
+              <td>
+                @switch (coluna.tipo) {
+                  @case ('area') {
+                    <textarea
+                      nz-input
+                      rows="2"
+                      [attr.aria-label]="coluna.rotulo"
+                      [value]="valor(linha, coluna)"
+                      (input)="aoAlterar(i, coluna, $any($event.target).value)"
+                    ></textarea>
+                  }
+                  @case ('data') {
+                    <input
+                      type="date"
+                      nz-input
+                      [attr.aria-label]="coluna.rotulo"
+                      [value]="valor(linha, coluna)"
+                      (input)="aoAlterar(i, coluna, $any($event.target).value)"
+                    />
+                  }
+                  @default {
+                    <input
+                      type="text"
+                      nz-input
+                      [class.center]="coluna.centralizado"
+                      [attr.aria-label]="coluna.rotulo"
+                      [attr.placeholder]="coluna.placeholder || null"
+                      [value]="valor(linha, coluna)"
+                      (input)="aoAlterar(i, coluna, $any($event.target).value)"
+                    />
+                  }
+                }
+              </td>
+            }
+            <td class="col-acao">
+              <button
+                nz-button
+                nzType="text"
+                nzDanger
+                type="button"
+                [attr.aria-label]="'Remover linha ' + (i + 1)"
+                (click)="remover.emit(i)"
+              >
+                <span nz-icon nzType="delete"></span>
+              </button>
+            </td>
+          </tr>
+        }
+      } @else {
+        <tr class="empty-row">
+          <td [attr.colspan]="colunas().length + 1">Nenhum registro ainda.</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>
+
+<button nz-button type="button" (click)="adicionar.emit()">+ {{ rotuloAdicionar() }}</button>
