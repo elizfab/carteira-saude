@@ -5,15 +5,15 @@
  *   npm run screenshots              -> sobe ng serve na porta 6100, captura e encerra
  *   SHOTS_BASE_URL=http://localhost:6001 npm run screenshots
  *                                    -> usa um servidor ja rodando (nao sobe outro)
- *   SHOTS_LIGHT=1 npm run screenshots -> captura tambem no tema light
+ *   SHOTS_DARK=1 npm run screenshots -> captura tambem no tema escuro
  *   CHROME_PATH=/caminho/chrome      -> forca um binario especifico
  *
- * Saida: docs/screenshots/<NN>-<rota>.png (e -light.png quando SHOTS_LIGHT=1)
+ * Saida: docs/screenshots/<NN>-<rota>.png (e -dark.png quando SHOTS_DARK=1)
  *
- * Nota: o tema vem do NgRx (theme.reducer.ts, default isDarkMode=true) sem persistencia
- * em localStorage. O toggle so existe via clique no botao "Mudar para Light/Dark"
- * (home.component.html), entao a variante light e obtida clicando nesse botao, nao
- * setando uma chave de storage como no projeto de referencia.
+ * Nota: o tema vem do NgRx (theme.reducer.ts, default isDarkMode=false, fiel ao protótipo que só
+ * tem tema claro) sem persistencia em localStorage. O toggle fica no topbar
+ * (app-topbar.component.html, botao com texto "Modo claro"/"Modo escuro"), entao a variante escura
+ * e obtida clicando nesse botao, nao setando uma chave de storage como no projeto de referencia.
  */
 import { spawn } from 'node:child_process';
 import { existsSync, mkdirSync, readdirSync } from 'node:fs';
@@ -27,13 +27,27 @@ const ROOT = path.join(__dirname, '..');
 const OUT_DIR = path.join(ROOT, 'docs', 'screenshots');
 const PORT = process.env.SHOTS_PORT || '6100';
 const BASE = (process.env.SHOTS_BASE_URL || `http://localhost:${PORT}`).replace(/\/$/, '');
-const LIGHT = !!process.env.SHOTS_LIGHT;
+const DARK = !!process.env.SHOTS_DARK;
 const VIEWPORT = { width: 1440, height: 900 };
 const SETTLE_MS = 2500; // espera animacoes de entrada (data-anim)
 
-// Rotas publicas da carteira de saude (atualizar conforme novas rotas forem criadas em app.routes.ts)
+// Rotas publicas da carteira de saude (atualizar conforme novas rotas forem criadas em
+// app.routes.ts / carteira.routes.ts)
 const ROUTES = [
-  { path: '/', name: '01-home' },
+  { path: '/carteira/dados', name: '01-dados-pessoais' },
+  { path: '/carteira/condicoes', name: '02-condicoes' },
+  { path: '/carteira/equipe', name: '03-equipe' },
+  { path: '/carteira/vacinas', name: '04-vacinas' },
+  { path: '/carteira/medicamentos', name: '05-medicamentos' },
+  { path: '/carteira/exames', name: '06-exames' },
+  { path: '/carteira/consultas', name: '07-consultas' },
+  { path: '/carteira/alergias', name: '08-alergias' },
+  { path: '/carteira/cirurgias', name: '09-cirurgias' },
+  { path: '/carteira/familiar', name: '10-familiar' },
+  { path: '/carteira/controle', name: '11-controle' },
+  { path: '/carteira/notas', name: '12-notas' },
+  { path: '/carteira/opcoes', name: '13-opcoes' },
+  { path: '/preview', name: '14-preview' },
 ];
 
 const findChrome = () => {
@@ -114,10 +128,10 @@ const main = async () => {
       await page.screenshot({ path: out, fullPage: true });
       console.log(`  ${out}`);
 
-      if (LIGHT) {
+      if (DARK) {
         const clicked = await page.evaluate(() => {
           const btn = Array.from(document.querySelectorAll('button')).find((b) =>
-            b.textContent?.includes('Mudar para Light')
+            b.textContent?.includes('Modo escuro')
           );
           if (!btn) return false;
           btn.click();
@@ -125,9 +139,9 @@ const main = async () => {
         });
         if (clicked) {
           await new Promise((r) => setTimeout(r, SETTLE_MS));
-          const light = path.join(OUT_DIR, `${name}-light.png`);
-          await page.screenshot({ path: light, fullPage: true });
-          console.log(`  ${light}`);
+          const dark = path.join(OUT_DIR, `${name}-dark.png`);
+          await page.screenshot({ path: dark, fullPage: true });
+          console.log(`  ${dark}`);
         }
       }
     }

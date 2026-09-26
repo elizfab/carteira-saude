@@ -12,15 +12,27 @@ $breakpoints: (
   }
 }
 
+// Fonte e paleta fiéis ao protótipo (docs/backup-carteira-saude/carteira-saude.html).
+// O protótipo não tem tema escuro; os valores abaixo (nível :root) são os defaults antes do
+// ThemeService aplicar body.dark/body.light — ver styles.scss para os dois temas.
 :root {
-  --font-base: 'Oswald', sans-serif;
-  --background: #201f25;
-  --text: #fefefe;
-  --color-primary: #007bff;
-  --color-danger: #dc3545;
+  --font-base: 'Carlito', 'Calibri', 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', Arial,
+    sans-serif;
+  --background: #f2f5f7;
+  --text: #1f2a33;
+  --color-primary: #2c5876;
+  --color-danger: #9b2c2c;
+  --blue: #4f7f9e;
+  --dblue: #2c5876;
+  --green: #6a9c80;
+  --dgreen: #3f6f55;
+  --lgray: #a3acb3;
+  --border: #8c98a1;
+  --hdr: #e7edf1;
+  --icobg: #e3edf3;
 }
 
-$color-primary: #007bff;
-$color-danger: #dc3545;
+$color-primary: #2c5876;
+$color-danger: #9b2c2c;
 $font-weight-bold: 700;
 $spacing-md: 1rem;

@@ -8,7 +8,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 10px 20px;
-  background: var(--background);
+  background: var(--panel-bg);
   border-bottom: 1px solid var(--line, currentColor);
 }
 
@@ -18,8 +18,8 @@
   align-items: center;
 
   .brand-icon {
-    font-size: 26px;
-    color: var(--color-primary);
+    width: 26px;
+    height: 26px;
   }
 
   b {

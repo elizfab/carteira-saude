@@ -37,7 +37,14 @@
                 "input": "public"
               }
             ],
-            "styles": ["src/theme.less", "src/styles.scss"],
+            "styles": [
+              "@fontsource/carlito/400.css",
+              "@fontsource/carlito/400-italic.css",
+              "@fontsource/carlito/700.css",
+              "@fontsource/carlito/700-italic.css",
+              "src/theme.less",
+              "src/styles.scss"
+            ],
             "scripts": []
           },
           "configurations": {

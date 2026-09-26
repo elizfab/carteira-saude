@@ -6,6 +6,7 @@ import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { provideNzI18n } from 'ng-zorro-antd/i18n';
 import { pt_BR } from 'ng-zorro-antd/i18n';
 import { provideNzIcons } from 'ng-zorro-antd/icon';
+import { NzModalService } from 'ng-zorro-antd/modal';
 import { registerLocaleData } from '@angular/common';
 import pt from '@angular/common/locales/pt';
 
@@ -25,5 +26,6 @@ export const appConfig: ApplicationConfig = {
     provideStore({ theme: themeReducer, perfil: perfilReducer }),
     provideEffects([PerfilEffects]),
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
+    NzModalService,
   ],
 };
