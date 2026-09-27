@@ -27,7 +27,7 @@ export class AppTopbarComponent {
 
   private readonly inputImportar = viewChild<ElementRef<HTMLInputElement>>('inputImportar');
 
-  readonly isDarkMode = toSignal(this.store.select(selectIsDarkMode), { initialValue: true });
+  readonly isDarkMode = toSignal(this.store.select(selectIsDarkMode), { initialValue: false });
 
   alternarTema(): void {
     this.store.dispatch(toggleTheme());
