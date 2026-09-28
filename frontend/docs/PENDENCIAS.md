@@ -18,14 +18,16 @@ conhecida, do protótipo de referência
   `theme.less` (`@primary-color`) também foi alinhado para os componentes ng-zorro (checkbox,
   radio, menu, etc.) usarem a mesma cor primária.
 - **Logo**: o ícone de coração do topbar (`.brand svg`) foi substituído pelo logo fornecido
-  (`public/logo.png`, já usado como favicon).
+  (`public/logo.png`, já usado como logo).
 
 ## Diferenças conscientes (não são bugs)
 
 - **Tema escuro**: o protótipo **não tem** tema escuro — é uma tela só, sempre clara
   (`body{background:#f2f5f7}`). O app Angular manteve o toggle claro/escuro que já existia no
   scaffold inicial deste projeto (fora do escopo da conversão), mas o tema **padrão agora é
-  claro** (`initialThemeState.isDarkMode = false`), fiel ao protótipo. O tema escuro é uma paleta
+  claro** (`initialThemeState.isDarkMode = false`), fiel ao protótipo. O `app-topbar` também usa
+  `initialValue: false` no `toSignal` do selector para evitar um flash do botão "Modo claro" no
+  primeiro render. O tema escuro é uma paleta
   própria (mesma relação tonal, cores diferentes), não uma tradução de nada que exista no
   protótipo.
 - **Paginação de "Equipe e acompanhamento" na impressão**: o protótipo estima a altura de cada
