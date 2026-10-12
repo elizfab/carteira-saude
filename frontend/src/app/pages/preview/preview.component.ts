@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, DestroyRef, OnInit, computed, injec
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 import { PerfilFacadeService } from '../../core/facades/perfil-facade.service';
 import { PrintLayoutService } from '../../core/services/print-layout.service';
 import { formatarDataBr } from '../../shared/utils/date.util';
@@ -9,7 +10,7 @@ import { formatarDataBr } from '../../shared/utils/date.util';
 @Component({
   selector: 'app-preview',
   standalone: true,
-  imports: [NzButtonModule],
+  imports: [NzButtonModule, NzIconModule],
   templateUrl: './preview.component.html',
   styleUrl: './preview.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
