@@ -72,6 +72,7 @@ body {
 
   .ant-btn {
     color: var(--text);
+    background-color: var(--panel-bg);
     border-color: var(--color-primary);
 
     &.ant-btn-primary {
@@ -79,5 +80,41 @@ body {
       background-color: var(--color-primary);
       border-color: var(--color-primary);
     }
+  }
+
+  .ant-input,
+  .ant-input-affix-wrapper,
+  .ant-input-number,
+  .ant-input-number-input,
+  .ant-picker,
+  .ant-select-selector,
+  .ant-select-single .ant-select-selector .ant-select-selection-item,
+  textarea.ant-input {
+    color: var(--text);
+    background-color: var(--panel-bg);
+    border-color: var(--line);
+  }
+
+  .ant-select-dropdown,
+  .ant-picker-panel-container {
+    color: var(--text);
+    background-color: var(--panel-bg);
+  }
+
+  .ant-select-item {
+    color: var(--text);
+
+    &-option-active,
+    &-option-selected {
+      background-color: var(--titlebg);
+    }
+  }
+
+  .ant-picker-cell {
+    color: var(--gray);
+  }
+
+  .ant-picker-cell-in-view {
+    color: var(--text);
   }
 }

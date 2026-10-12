@@ -38,12 +38,23 @@
 }
 
 .print-header {
+  position: relative;
   display: flex;
   justify-content: space-between;
   padding-bottom: 8px;
-  border-bottom: 1px solid #8c98a1;
+  border-bottom: 2px solid #4f7f9e;
   font-size: 10pt;
   color: #5f6b75;
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    width: 24mm;
+    height: 1.5px;
+    background: #6a9c80;
+  }
 }
 
 .print-brand {
@@ -56,10 +67,104 @@
   margin-top: 12px;
 }
 
+.print-hero {
+  display: flex;
+  align-items: flex-start;
+  gap: 6mm;
+  margin-bottom: 6mm;
+}
+
+.print-hero-logo {
+  width: 20mm;
+  height: 20mm;
+  margin-top: 3mm;
+  flex: none;
+}
+
+.print-hero-text {
+  flex: 1;
+
+  h1 {
+    margin: 1mm 0 2mm;
+    font-size: 24pt;
+    line-height: 1.1;
+    color: #2c5876;
+  }
+
+  p {
+    margin: 0;
+    font-size: 11pt;
+    color: #5f6b75;
+  }
+}
+
+.print-hero-bars {
+  display: flex;
+  gap: 1.5mm;
+  margin-top: 3mm;
+
+  i {
+    display: block;
+    height: 1mm;
+    border-radius: 0.5mm;
+    width: 10mm;
+    background: #6a9c80;
+
+    &+i {
+      width: 7.5mm;
+      background: #4f7f9e;
+    }
+  }
+}
+
+.print-photo {
+  flex: none;
+  width: 30mm;
+  height: 40mm;
+  border: 0.3mm dashed #8c98a1;
+  border-radius: 1.4mm;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  color: #a3acb3;
+  font-size: 9pt;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
 .print-title {
+  display: flex;
+  align-items: center;
+  gap: 3mm;
+  height: 11mm;
+  margin: 0 0 5mm;
+  padding: 0 3mm 0 2.5mm;
+  background: #eef3f6;
+  border-radius: 1.4mm;
+  box-shadow: inset 1.8mm 0 0 #4f7f9e;
+}
+
+.print-title-icon {
+  display: grid;
+  place-items: center;
+  width: 8mm;
+  height: 8mm;
+  flex: none;
+  border-radius: 50%;
+  background: #e3edf3;
+  border: 0.25mm solid #4f7f9e;
+  color: #2c5876;
+  font-size: 11pt;
+}
+
+.print-title-text {
   color: #2c5876;
   font-size: 14pt;
-  margin: 0 0 12px;
+  font-weight: 700;
 
   small {
     font-weight: 400;
@@ -105,6 +210,44 @@
     white-space: pre-line;
     min-height: 1.2em;
   }
+
+  &--sangue .v {
+    white-space: normal;
+  }
+}
+
+.print-blood {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2.2mm;
+
+  b {
+    font-weight: 400;
+    color: #5f6b75;
+    margin-left: 1mm;
+  }
+}
+
+.print-blood-opt {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.print-check {
+  display: inline-block;
+  width: 3mm;
+  height: 3mm;
+  margin-right: 0.9mm;
+  border: 0.25mm solid #8c98a1;
+  border-radius: 0.5mm;
+  font-style: normal;
+
+  &.on {
+    background: #2c5876;
+    border-color: #2c5876;
+  }
 }
 
 .print-table {
@@ -123,6 +266,7 @@
   th {
     background: #e7edf1;
     color: #2c5876;
+    border-bottom: 1.4px solid #4f7f9e;
   }
 
   &--mini {
@@ -134,7 +278,7 @@
 .print-card {
   border: 1px solid #8c98a1;
   border-radius: 3px;
-  padding: 8px;
+  overflow: hidden;
   margin-bottom: 12px;
 }
 
@@ -142,18 +286,38 @@
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
-  margin-bottom: 6px;
+  align-items: center;
+  margin: 0;
+  padding: 7px 8px;
+  background: #eef3f6;
+  border-bottom: 1.4px solid #4f7f9e;
 
   b {
     color: #2c5876;
+    font-size: 11pt;
+  }
+}
+
+.print-card > .print-table {
+  width: calc(100% - 16px);
+  margin: 8px;
+
+  &:first-of-type {
+    margin-top: 8px;
+  }
+
+  &:last-child {
+    margin-bottom: 8px;
   }
 }
 
 .print-box {
   border: 1px solid #8c98a1;
   border-radius: 3px;
-  padding: 8px;
+  overflow: hidden;
   margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
 
   &--full {
     flex: 1;
@@ -164,26 +328,35 @@
   display: flex;
   gap: 10px;
   align-items: baseline;
-  margin-bottom: 6px;
+  margin: 0;
+  padding: 6px 8px;
+  background: #eef3f6;
+  border-bottom: 1px solid #c9d0d5;
 
   b {
     color: #2c5876;
+    font-size: 11pt;
   }
 
   em {
     color: #5f6b75;
     font-size: 9pt;
+    font-style: italic;
   }
 
-  .print-check {
-    margin-left: auto;
-    text-transform: capitalize;
-    font-size: 9pt;
-    color: #3f6f55;
-  }
+}
+
+.print-tristate {
+  display: flex;
+  gap: 3mm;
+  margin-left: auto;
+  font-size: 9pt;
+  white-space: nowrap;
 }
 
 .print-box-body {
+  flex: 1;
+  padding: 8px;
   white-space: pre-line;
   min-height: 3em;
 }

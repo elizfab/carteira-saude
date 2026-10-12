@@ -14,11 +14,32 @@
         </header>
 
         <div class="print-body">
+          @if (i === 0) {
+            <div class="print-hero">
+              <img src="logo.png" alt="" class="print-hero-logo" />
+              <div class="print-hero-text">
+                <h1>Carteira de Saúde<br />e Vacinação</h1>
+                <p>Registro pessoal de vacinas, medicamentos, exames e consultas</p>
+                <div class="print-hero-bars"><i></i><i></i></div>
+              </div>
+              <div class="print-photo">
+                @if (p.dados.foto) {
+                  <img [src]="p.dados.foto" alt="Foto 3x4 do paciente" />
+                } @else {
+                  <span>Foto 3x4</span>
+                }
+              </div>
+            </div>
+          }
+
           <h2 class="print-title">
-            {{ i + 1 }}. {{ pagina.titulo }}
-            @if (pagina.continuacao) {
-              <small>(continuação)</small>
-            }
+            <span class="print-title-icon" nz-icon [nzType]="pagina.icone"></span>
+            <span class="print-title-text">
+              {{ pagina.numero }}. {{ pagina.titulo }}
+              @if (pagina.continuacao) {
+                <small>(continuação)</small>
+              }
+            </span>
           </h2>
 
           @switch (pagina.tipo) {
@@ -36,9 +57,22 @@
                   <span class="l">CPF</span>
                   <div class="v">{{ p.dados.cpf }}</div>
                 </div>
-                <div class="print-field">
+                <div class="print-field print-field--sangue">
                   <span class="l">Tipo sanguíneo</span>
-                  <div class="v">{{ p.dados.abo }}{{ p.dados.rh }}</div>
+                  <div class="v print-blood">
+                    @for (tipo of ['A', 'B', 'AB', 'O']; track tipo) {
+                      <span class="print-blood-opt">
+                        <i class="print-check" [class.on]="p.dados.abo === tipo"></i>{{ tipo }}
+                      </span>
+                    }
+                    <b>Rh</b>
+                    <span class="print-blood-opt">
+                      <i class="print-check" [class.on]="p.dados.rh === '+'"></i>+
+                    </span>
+                    <span class="print-blood-opt">
+                      <i class="print-check" [class.on]="p.dados.rh === '-'"></i>−
+                    </span>
+                  </div>
                 </div>
               </div>
               <div class="print-row">
@@ -196,8 +230,18 @@
                     @if (bloco.hint) {
                       <em>{{ bloco.hint }}</em>
                     }
-                    @if (bloco.check) {
-                      <span class="print-check">{{ bloco.check }}</span>
+                    @if (bloco.check !== undefined) {
+                      <span class="print-tristate">
+                        @for (opt of [
+                          { v: 'nsei', l: 'Não sei' },
+                          { v: 'nao', l: 'Não' },
+                          { v: 'sim', l: 'Sim' },
+                        ]; track opt.v) {
+                          <span class="print-blood-opt">
+                            <i class="print-check" [class.on]="bloco.check === opt.v"></i>{{ opt.l }}
+                          </span>
+                        }
+                      </span>
                     }
                   </div>
                   <div class="print-box-body">{{ bloco.texto }}</div>
